@@ -35,10 +35,44 @@ public_users.get('/',function (req, res) {
   res.send(JSON.stringify(books,null,4))
 });
 
+public_users.get('/books',function (req, res) {
+
+    const get_books = new Promise((resolve, reject) => {
+        resolve(res.send(JSON.stringify({books}, null, 4)));
+      });
+
+      get_books.then(() => console.log("Promise for Task 10 resolved"));
+
+  });
+
+
+//public_users.get('/isbn/:isbn',function (req, res) {
+//  const isbn = req.params.isbn;
+//  res.send(books[isbn])
+// });
+
 public_users.get('/isbn/:isbn',function (req, res) {
-  const isbn = req.params.isbn;
-  res.send(books[isbn])
- });
+    const isbn = req.params.isbn;
+    const get_details = new Promise((resolve, reject) => {
+    resolve(res.send(books[isbn]));
+    });
+
+    get_details.then(() => console.log("Promise for Task 11 resolved"));
+});
+
+public_users.get('/author/:author',function (req, res) {
+    const author = req.params.author;
+      var filtered_book;
+      let i = 1;
+      while(books[i]){
+          if (books[i]["author"]===author) {
+              filtered_book = books[i];
+              break;
+          }
+          i++;
+      }
+     res.send(filtered_book)
+  });
 
 public_users.get('/author/:author',function (req, res) {
   const author = req.params.author;
@@ -68,6 +102,7 @@ public_users.get('/title/:title',function (req, res) {
    res.send(filtered_book)
 
 });
+
 
 public_users.get('/review/:isbn',function (req, res) {
   const isbn = req.params.isbn;
