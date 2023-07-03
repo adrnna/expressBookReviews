@@ -62,20 +62,6 @@ public_users.get('/isbn/:isbn',function (req, res) {
 
 public_users.get('/author/:author',function (req, res) {
     const author = req.params.author;
-      var filtered_book;
-      let i = 1;
-      while(books[i]){
-          if (books[i]["author"]===author) {
-              filtered_book = books[i];
-              break;
-          }
-          i++;
-      }
-     res.send(filtered_book)
-  });
-
-public_users.get('/author/:author',function (req, res) {
-  const author = req.params.author;
     var filtered_book;
     let i = 1;
     while(books[i]){
@@ -85,12 +71,30 @@ public_users.get('/author/:author',function (req, res) {
         }
         i++;
     }
-   res.send(filtered_book)
+    const get_author = new Promise((resolve, reject) => {
+    resolve(res.send(filtered_book));
+    });
+
+    get_author.then(() => console.log("Promise for Task 12 resolved"));
 });
 
+//public_users.get('/author/:author',function (req, res) {
+//  const author = req.params.author;
+//    var filtered_book;
+//    let i = 1;
+//    while(books[i]){
+//        if (books[i]["author"]===author) {
+//            filtered_book = books[i];
+//            break;
+//        }
+//        i++;
+//    }
+//   res.send(filtered_book)
+//});
+
 public_users.get('/title/:title',function (req, res) {
-  const title = req.params.title;
-  var filtered_book;
+    const title = req.params.title;
+    var filtered_book;
     let i = 1;
     while(books[i]){
         if (books[i]["title"]===title) {
@@ -99,9 +103,26 @@ public_users.get('/title/:title',function (req, res) {
         }
         i++;
     }
-   res.send(filtered_book)
+    const get_title = new Promise((resolve, reject) => {
+    resolve(res.send(filtered_book));
+    });
 
+    get_title.then(() => console.log("Promise for Task 13 resolved"));
 });
+
+//public_users.get('/title/:title',function (req, res) {
+//  const title = req.params.title;
+//  var filtered_book;
+//    let i = 1;
+//    while(books[i]){
+//        if (books[i]["title"]===title) {
+//            filtered_book = books[i];
+//            break;
+//        }
+//        i++;
+//    }
+//   res.send(filtered_book)
+//});
 
 
 public_users.get('/review/:isbn',function (req, res) {
